@@ -18,6 +18,8 @@ Sequence :
 - connect DB
 - setup react router
 - React-Router -> Chat Screen
+- User Authentication
+- Add State Provider
 
 To Dos :
 - create project on firebase
