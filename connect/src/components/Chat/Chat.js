@@ -5,13 +5,13 @@ import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { doc, onSnapshot, collection, query, orderBy } from 'firebase/firestore';
 import db from '../../firebase';
 import Messages from '../Messages/Messages';
+import ChatInput from './ChatInput/ChatInput';
 import './Chat.css';
 
 const Chat = () => {
 
     // get id from current URL using useParams()
     const { channelId } = useParams();
-
     const [channelDetails, setChannelDetails] = useState(null);
     const [channelMessages, setChannelMessages] = useState([]);
 
@@ -37,9 +37,6 @@ const Chat = () => {
         }
     }, [channelId]);
 
-    console.log(channelDetails);
-    console.log(channelMessages);
-
     return (
         <div className='chat'>
             <div className='chat_header'>
@@ -57,14 +54,17 @@ const Chat = () => {
             </div>
             <div className='chat_messages'>
                 {channelMessages.map(({ message, timestamp, user, userImage }) => (
-                    <Messages
-                        message={message}
-                        timestamp={timestamp}
-                        user={user}
-                        userImage={userImage}
-                    />
+                    <>
+                        <Messages
+                            message={message}
+                            timestamp={timestamp}
+                            user={user}
+                            userImage={userImage}
+                        />
+                    </>
                 ))}
             </div>
+            <ChatInput channelName={channelDetails?.name} channelId={channelId} />
         </div>
     )
 }

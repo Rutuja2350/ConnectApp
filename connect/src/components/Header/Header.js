@@ -5,14 +5,26 @@ import SearchIcon from '@mui/icons-material/Search';
 import Avatar from '@mui/material/Avatar';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
+// using user's state from state provider --- (1/3)
+import { useStateValue } from '../../StateProvider/StateProvider';
+
 function Header() {
+
+  // (2/3)
+  const [{ user }] = useStateValue();
+
+  console.log("user ", user)
+  console.log("user.photoURL ", user.photoURL)
+
   return (
     <div className='header'>
       <div className='header_left'>
         <Avatar
           className='header_avatar'
-          alt='time'
-          src=''
+          // (3/3)
+          // "displayName" function or the "user", this is not from the DB, rather it is from the google authentication service providing actual google account info
+          src={user?.photoURL}
+          alt={user?.displayName}
         />
         <AccessTimeIcon />
       </div>
@@ -27,4 +39,4 @@ function Header() {
   )
 }
 
-export default Header
+export default Header;
